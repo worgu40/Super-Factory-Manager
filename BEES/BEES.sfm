@@ -40,6 +40,29 @@ every 20 ticks do
     forget
     -- take raw items to ender chest
     input *raw* from chest
-    output *raw to enderChest
+    output *raw* to enrichmentChamber top side
     forget
+    input from enrichmentChamber bottom side
+    output EXCEPT *raw* to chest
+    forget
+    input with tag #dusts EXCEPT redstone from chest
+    output with tag #dusts EXCEPT redstone to enderChest
+    forget
+    input productivebees:honey_treat from chest
+    output productivebees:honey_treat to incubator
+    forget
+    input productivebees:gene from chest
+    output productivebees:gene to geneIndexer
+    forget
+    input fluid:: from tank bottom side
+    output fluid:: to enderTank
+    forget
+    input productivebees:draconic_dust from chest
+    input productivebees:wax from chest
+    input the_bumblezone:pollen_puff from chest
+    input redstone from chest
+    output the_bumblezone:pollen_puff to enderToME
+    output productivebees:wax to enderToME
+    output productivebees:draconic_dust to enderToME
+    output redstone to enderToME
 end
