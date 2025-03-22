@@ -1,0 +1,45 @@
+name "BEES" -- Name for the disk
+
+every 1 ticks do
+input fe:: from energyCell top side
+output fe:: to needsPowers top side
+end
+
+every 20 ticks do
+    -- Grab from all hives
+    input from hive
+    output to chest
+    forget
+    -- Take comb blocks to honeycombs
+    input with tag #storage_blocks/honeycombs from chest
+    output with tag #storage_blocks/honeycombs to crafter top side
+    forget
+    -- bring honeycombs back to chest
+    input with tag #honeycombs from crafter
+    output with tag #honeycombs to chest
+    forget
+    -- take honeycombs to centrifuge
+    input with tag #honeycombs from chest
+    output 64 to each centrifuge
+    forget
+    -- take results from centrifuge
+    input from centrifuge
+    output EXCEPT *comb* to chest
+    forget
+    -- take honey to tank
+    input fluid:: from centrifuge
+    output fluid:: to tank top side
+    forget
+    -- take gene bottles to centrifuge
+    input productivebees:gene_bottle from chest
+    output productivebees:gene_bottle to geneCentrifuge
+    forget
+    -- take gene results to indexer
+    input from geneCentrifuge
+    output to geneIndexer
+    forget
+    -- take raw items to ender chest
+    input *raw* from chest
+    output *raw to enderChest
+    forget
+end
